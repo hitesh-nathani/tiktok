@@ -5,7 +5,7 @@ import { RiMessage3Fill } from "react-icons/ri";
 import { IoMdShare } from "react-icons/io";
 
 function VideoSidebar(props) {
-    const { likes, shares, messages } = props;
+  const { likes, shares, messages } = props;
   const [liked, setLiked] = React.useState(false);
   return (
     <div className="videoSidebar">
@@ -33,4 +33,4 @@ function VideoSidebar(props) {
   );
 }
 
-export default VideoSidebar;
+export default React.memo(VideoSidebar);

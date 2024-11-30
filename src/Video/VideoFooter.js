@@ -12,9 +12,7 @@ function VideoFooter(props) {
         <p>{description}</p>
         <div className="videoFooter__ticker">
           <BsMusicNote fontSize="large" className="videoFooter__icon" />
-          <Ticker>
-            {({ index }) => <p>{song}</p>}
-          </Ticker>
+          <Ticker>{({ index }) => <p>{song}</p>}</Ticker>
         </div>
       </div>
       <img
@@ -26,4 +24,4 @@ function VideoFooter(props) {
   );
 }
 
-export default VideoFooter;
+export default React.memo(VideoFooter);
