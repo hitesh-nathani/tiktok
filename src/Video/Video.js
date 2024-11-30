@@ -1,13 +1,14 @@
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import "./Video.css";
 import VideoFooter from "./VideoFooter";
+import VideoSidebar from "./VideoSidebar";
 
-function Video() {
+function Video({ url, channel, description, song, likes, shares, messages }) {
   const [playing, setPlaying] = React.useState(false);
   const videoRef = useRef(null);
 
-  //  video playing, pause it function
-  const handleVideoPress = () => {
+  // UseCallback for stable function reference
+  const handleVideoPress = useCallback(() => {
     if (playing) {
       videoRef.current.pause();
       setPlaying(false);
@@ -15,29 +16,27 @@ function Video() {
       videoRef.current.play();
       setPlaying(true);
     }
-  };
+  }, [playing]);
+
   return (
     <div className="video">
       <video
-        onClick={handleVideoPress}
+        onClick={() => {
+          handleVideoPress();
+        }}
         className="video__player"
-        src="https://cdn.pixabay.com/video/2024/08/30/228847_large.mp4"
+        src={url}
         ref={videoRef}
-        loop
       ></video>
 
       {/* Video footer */}
-      
-      <VideoFooter />
+      <VideoFooter channel={channel} description={description} song={song} />
 
       {/* Video sidebar */}
-      <div className="video__sidebar">
-        <div className="sidebar__button">❤️ 123</div>
-        <div className="sidebar__button">💬 45</div>
-        <div className="sidebar__button">🔗 Share</div>
-      </div>
+      <VideoSidebar likes={likes} shares={shares} messages={messages} />
     </div>
   );
 }
 
-export default Video;
+// Memoize the child components
+export default React.memo(Video);
