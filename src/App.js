@@ -6,10 +6,14 @@ import axios from "./axios";
 function App() {
   const [videos, setVideos] = useState([]);
   console.log("🚀 ~ App ~ videos:", videos);
-  async function getData() {
-    const response = await axios.get("v2/posts");
-    setVideos(response.data);
-  }
+  const getData = async () => {
+    try {
+      const response = await axios.get("v2/posts");
+      setVideos(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   //   {
   //     "_id": "674b1abc4d6884c487ee6170",
@@ -26,6 +30,24 @@ function App() {
   useEffect(() => {
     getData();
   }, []);
+
+  const handleVideoLike = async (id) => {
+    console.log("🚀 ~ handleVideoLike ~ id:", id);
+    try {
+      const res = await fetch(`http://localhost:9000/v2/posts/${id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (res?.status) {
+        console.log(res);
+        getData();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="app">
       <h1>Lets build a Full Stack MERN Tik tok clone</h1>
@@ -41,6 +63,10 @@ function App() {
               likes={video.likes}
               shares={video.shares}
               messages={video.messages}
+              id={video._id}
+              handleVideoLike={() => {
+                handleVideoLike(video._id);
+              }}
             />
           ))}
         {/* <Video

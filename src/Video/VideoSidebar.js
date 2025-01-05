@@ -5,7 +5,7 @@ import { RiMessage3Fill } from "react-icons/ri";
 import { IoMdShare } from "react-icons/io";
 
 function VideoSidebar(props) {
-  const { likes, shares, messages } = props;
+  const { likes, shares, messages, updateLike } = props;
   const [liked, setLiked] = React.useState(false);
   return (
     <div className="videoSidebar">
@@ -17,7 +17,14 @@ function VideoSidebar(props) {
             onClick={(e) => setLiked(false)}
           />
         ) : (
-          <MdOutlineFavoriteBorder size={30} onClick={(e) => setLiked(true)} />
+          <MdOutlineFavoriteBorder
+            size={30}
+            onClick={(e) => {
+              setLiked(true);
+
+              updateLike();
+            }}
+          />
         )}
         <p>{likes}</p>
       </div>

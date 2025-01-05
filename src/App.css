@@ -1,12 +1,12 @@
 html {
-  scroll-snap-type:  y mandatory;
+  scroll-snap-type: y mandatory;
 }
-body{
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: #f4f4f4;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .app {
@@ -22,7 +22,7 @@ body{
   border-radius: 20px;
   overflow: scroll;
   /* width: 80%; */
-  max-width: 500px;
+  max-width: 410px;
   scroll-snap-type: y mandatory;
   /* scroll-behavior: smooth; */
 }
